@@ -11,13 +11,15 @@ const Navbar = () => {
           src={LOGO}
           alt="logo"
         />
-        <h1 className="font-bold text-3xl drop-shadow-xl text-indigo-400 font-heorot">ImageNation</h1>
+        <h1 className="text-3xl drop-shadow-xl text-cyan-500 font-norseBold">
+          ImageNation
+        </h1>
       </div>
       <div>
-        <ul className="flex">
-          <li className="m-2">Home</li>
-          <li className="m-2">About</li>
-          <li className="m-2">Contact</li>
+        <ul className="flex font-norseReg text-cyan-300 text-xl">
+          <li className="m-2 cursor-pointer">Home</li>
+          <li className="m-2 cursor-pointer">About</li>
+          <li className="m-2 cursor-pointer">Contact</li>
         </ul>
       </div>
     </div>

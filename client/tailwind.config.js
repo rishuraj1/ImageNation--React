@@ -10,7 +10,8 @@ export default {
         'xl' : '0 0 10px rgba(0, 0, 0, 0.25)'
       },
       fontFamily: {
-        heorot: "Heorot"
+        norseBold: ['norseBold', 'sans-serif'],
+        norseReg: ['norseReg', 'sans-serif'],
       }
     },
   },
