@@ -23,7 +23,7 @@ const SignInPage = () => {
             <div className='bg-gradient-to-br from-[#13046b] to-[#0c0527] p-5 rounded-md shadow-lg flex flex-col justify-center items-center gap-5'>
                 <div className='flex items-center'>
                     <h1 className='text-yellow-400 text-3xl font-norseBold'>Imagenation</h1>
-                </div>  
+                </div>
                 <div className='flex justify-center items-center gap-5'>
                     <div className='flex flex-col justify-between items-center text-center gap-16'>
                         <h1 className='text-3xl text-center text-white font-bold'>Welcome Back</h1>
