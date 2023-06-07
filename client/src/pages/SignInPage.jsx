@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom'
 
 const SignInPage = () => {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function onSignIn(e) {
+        e.preventDefault();
+        console.log('Sign In button clicked');
+    }
+
     const [show, setShow] = useState(false);
 
     function showPW() {
@@ -37,19 +45,36 @@ const SignInPage = () => {
                         <p className='text-cyan-300 font-medium'>Do not have an account ? <span className='text-cyan-600 hover:text-cyan-700 transition-all duration-300 ease-in-out '><Link to="/signup">Sign Up</Link></span> </p>
                     </div>
                     <div className="bg-cyan-300 rounded-md shadow-lg">
+
+                        {/* Sign In form */}
                         <form className='flex flex-col justify-center items-center gap-5 p-5'>
                             <h1 className='text-2xl text-center text-[#13046b] font-bold'>Sign In</h1>
-
+                            {/* Email */}
                             <div className='flex'>
                                 <MdEmail className='w-[20px] h-[20px] text-cyan-600 absolute mt-2 ml-1 text-center' />
-                                <input type="text" placeholder='Email' className='w-[300px] h-[40px] rounded-md outline-none px-6 text-center block' />
+                                <input
+                                    name='email'
+                                    type="text"
+                                    placeholder='Email'
+                                    className='w-[300px] h-[40px] rounded-md outline-none px-6 text-center block'
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
 
+                            {/* Password */}
                             <div className='flex'>
                                 <MdPassword className='w-[20px] h-[20px] text-cyan-600 absolute text-center mt-2 ml-1' />
-                                <input type="password" placeholder='Password'
+                                <input
+                                    name='password'
+                                    type="password"
+                                    placeholder='Password'
                                     id='password'
-                                    className='w-[300px] h-[40px] rounded-md outline-none px-6 text-center block' />
+                                    className='w-[300px] h-[40px] rounded-md outline-none px-6 text-center block'
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+
                                 {show ?
                                     <AiFillEyeInvisible className='w-[20px] h-[20px] text-cyan-600 absolute text-center cursor-pointer mt-2 ml-[272px]'
                                         onClick={() => {
@@ -62,7 +87,11 @@ const SignInPage = () => {
                                         showPW();
                                     }} />}
                             </div>
-                            <button className='w-[300px] h-[40px] rounded-md bg-cyan-600 text-white font-bold hover:bg-cyan-700 transition-all ease-in-out duration-300'>Sign In</button>
+
+                            {/* Sign In button */}
+                            <button
+                                onClick={onSignIn}
+                                className='w-[300px] h-[40px] rounded-md bg-cyan-600 text-white font-bold hover:bg-cyan-700 transition-all ease-in-out duration-300'>Sign In</button>
                             <p className='font-medium text-[#13046b] hover:underline cursor-pointer transition-all duration-150 ease-in-out'>Forgot Password ?</p>
                         </form>
                     </div>
