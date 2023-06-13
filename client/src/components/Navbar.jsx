@@ -22,6 +22,7 @@ const Navbar = () => {
         <ul className="flex">
           <Link to="/home"><li className="m-2 cursor-pointer  font-norseReg text-cyan-300 font-semibold text-xl hover:text-cyan-400 transition-all ease-in-out duration-300">Home</li>
           </Link>
+          <Link to="/community"><li className="m-2 cursor-pointer font-norseReg text-cyan-300 font-semibold text-xl hover:text-cyan-400 transition-all ease-in-out duration-300">Community</li></Link>
           <Link to="/about" >
             <li className="m-2 cursor-pointer  font-norseReg text-cyan-300 font-semibold text-xl hover:text-cyan-400 transition-all ease-in-out duration-300">About</li>
           </Link>

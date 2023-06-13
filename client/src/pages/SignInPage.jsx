@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaFacebook } from 'react-icons/fa'
+import { FaFacebook, FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { MdEmail, MdPassword } from 'react-icons/md'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
@@ -40,6 +40,8 @@ const SignInPage = () => {
                             <div className='flex justify-center items-center gap-5'>
                                 <FcGoogle className='w-[30px] h-[30px] text-cyan-600 hover:text-[#db4437] transition-all ease-in-out duration-300 cursor-pointer' />
                                 <FaFacebook className='w-[30px] h-[30px] text-cyan-600 hover:text-[#3b5998] transition-all ease-in-out duration-300 cursor-pointer' />
+                                <FaGithub className='w-[30px] h-[30px] text-cyan-600 hover:text-white transition-all ease-in-out duration-300 cursor-pointer' />
+
                             </div>
                         </div>
                         <p className='text-cyan-300 font-medium'>Do not have an account ? <span className='text-cyan-600 hover:text-cyan-700 transition-all duration-300 ease-in-out '><Link to="/signup">Sign Up</Link></span> </p>

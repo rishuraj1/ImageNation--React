@@ -3,7 +3,7 @@ import "./App.css";
 import { Footer, Navbar } from "./components";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { Home, About, Contact, SignInPage, SignUpPage } from "./pages";
+import { Home, About, Contact, SignInPage, SignUpPage, Community } from "./pages";
 
 const App = () => {
   return (
@@ -12,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/community" element={<Community />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignInPage />} />
