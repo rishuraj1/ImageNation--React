@@ -46,7 +46,7 @@ const SignUpPage = () => {
   }
 
   return (
-    <div className='p-5 flex justify-center items-center bg-cyan-400 max-h-screen'>
+    <div className='p-5 flex justify-center items-center bg-cyan-400 max-h-screen dark:bg-slate-900 min-h-screen'>
       <div className='bg-gradient-to-br from-[#13046b] to-[#0c0527] p-5 rounded-md shadow-lg flex flex-col justify-center items-center gap-5'>
         <div className='flex items-center w-full justify-center'>
           <h1 className='text-yellow-400 text-3xl font-norseBold'>Imagenation</h1>
@@ -64,7 +64,7 @@ const SignUpPage = () => {
             </div>
             <p className='text-cyan-300 font-medium'>Already have an acccount ? <span className='text-cyan-600 hover:text-cyan-700 transition-all duration-300 ease-in-out '><Link to="/signin">Sign In</Link></span> </p>
           </div>
-          <div className="bg-cyan-300 rounded-md shadow-lg w-2/3">
+          <div className="bg-cyan-300 dark:bg-slate-900 rounded-md shadow-lg w-2/3">
             {/* Sign Up form */}
             <form className='flex flex-col justify-center items-center gap-5 p-5'>
               <h1 className='text-2xl text-center text-[#13046b] font-bold'>Sign Up</h1>

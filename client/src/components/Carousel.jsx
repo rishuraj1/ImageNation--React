@@ -67,7 +67,7 @@ const Carousel = () => {
                 : "hidden max-w-full opacity-40 transition duration-1000 ease-in-out transform scale-95"
                 }`}
               onClick={handlePlay} />
-            <a href={image.url} target='_blank'><h2 className={`flex hover:text-[#13046b] items-center font-semibold text-center ${index === activeIndex
+            <a href={image.url} target='_blank'><h2 className={`flex dark:text-cyan-500 dark:hover:text-white hover:text-[#13046b] items-center font-semibold text-center ${index === activeIndex
               ? "opacity-100 transition duration-500 ease-in-out transform scale-100"
               : "hidden max-w-full opacity-40 transition duration-1000 ease-in-out transform scale-95"
               }`}>{image.title} - {image.creation_date}</h2></a>
@@ -78,9 +78,9 @@ const Carousel = () => {
         <button className="mx-2" onClick={handlePlay}>
           {" "}
           {isPaused ? (
-            <BsFillPlayFill className="text-4xl text-gray-500 hover:text-[#13046b] transition-all duration-200 ease-in-out" />
+            <BsFillPlayFill className="text-4xl text-gray-500 dark:hover:text-white hover:text-[#13046b] transition-all duration-200 ease-in-out" />
           ) : (
-            <BsFillPauseFill className="text-4xl text-gray-500 hover:text-[#13046b] transition-all duration-200 ease-in-out" />
+            <BsFillPauseFill className="text-4xl text-gray-500 hover:text-[#13046b] dark:hover:text-white transition-all duration-200 ease-in-out" />
           )}{" "}
         </button>
       </div>
