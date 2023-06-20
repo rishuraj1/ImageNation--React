@@ -11,6 +11,9 @@ const Home = () => {
       <Carousel className="w-full" />
       <div className='bg-transparent p-5 justify-center items-center'>
       </div>
+      <div className='flex'>
+        
+      </div>
     </div>
   )
 }

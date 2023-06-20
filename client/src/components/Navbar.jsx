@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { LOGO } from "../assets";
+import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
-const Navbar = ({ darkMode, setDarkMode }) => {
+const Navbar = ({ darkMode, setDarkMode, setUser, user }) => {
 
 
 
@@ -33,20 +34,35 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <Link to="/contact" >
               <li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl hover:text-purple-700 transition-all ease-in-out duration-300 dark:text-white dark:hover:text-purple-800">Contact</li>
             </Link>
-            <Link to="/signin">
-              <button className="bg-indigo-500 rounded-md items-center mr-2 hover:bg-blue-900 transition-all ease-in-out duration-300">
-                <li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl transition-all ease-in-out duration-300 dark:text-white">Sign In</li>
-              </button>
-            </Link>
-            <Link to="/signup">
-              <button className="bg-indigo-500 rounded-md items-center hover:bg-blue-900 transition-all ease-in-out duration-300">
-                <li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl transition-all ease-in-out duration-300 dark:text-white">Sign Up</li>
-              </button>
-            </Link>
+
+            {/* Sign In or Profile */}
+            {user ?
+              <Link to="/profile">
+                {user.picture &&
+                  <div className="flex flex-col  justify-center items-center outline-black">
+                    <img className="rounded-full w-[50px]" src={user.picture} alt="profile" />
+                  </div>
+                }
+              </Link>
+              : <Link to="/signin">
+                <button className="bg-indigo-500 rounded-md items-center mr-2 hover:bg-blue-900 transition-all ease-in-out duration-300">
+                  <li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl transition-all ease-in-out duration-300 dark:text-white">Sign In</li>
+                </button>
+              </Link>}
+
+            {/* Sign out OR Sign Up */}
+            {user ?
+              <button onClick={() => setUser(null)} className="bg-indigo-500 rounded-md items-center hover:bg-blue-900 transition-all ease-in-out duration-300 "><li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl transition-all ease-in-out duration-300 dark:text-white">Sign Out</li></button>
+              :
+              <Link to="/signup">
+                <button className="bg-indigo-500 rounded-md items-center hover:bg-blue-900 transition-all ease-in-out duration-300">
+                  <li className="m-2 cursor-pointer  font-norseBold text-gray-800 text-2xl transition-all ease-in-out duration-300 dark:text-white">Sign Up</li>
+                </button>
+              </Link>}
 
             {darkMode ? <BsFillSunFill
-             className="cursor-pointer text-xl text-cyan-500 hover:text-cyan-200 transition-all ease-in-out duration-300"
-            onClick={() => setDarkMode(false)} />
+              className="cursor-pointer text-xl text-cyan-500 hover:text-cyan-200 transition-all ease-in-out duration-300"
+              onClick={() => setDarkMode(false)} />
               : <BsFillMoonStarsFill
                 onClick={() => setDarkMode(true)}
                 className="cursor-pointer text-xl text-gray-700 hover:text-gray-800 transition-all ease-in-out duration-300"

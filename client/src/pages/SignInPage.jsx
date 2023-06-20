@@ -3,12 +3,10 @@ import { FaFacebook, FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { MdEmail, MdPassword } from 'react-icons/md'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 
-const SignInPage = () => {
-
-    const [user, setUser] = useState({});
+const SignInPage = ({ setUser }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,20 +26,32 @@ const SignInPage = () => {
         document.getElementById("password").setAttribute("type", "password");
     }
 
-    function initializeGoogleSignIn() {
-        google.accounts.id.initialize({
-            client_id: "423419295795-qegv9t31c1af05v8oer1di25cqtsqf5c.apps.googleusercontent.com",
-            callback: handleCredentialResponse
-        });
-        function handleCredentialResponse(response) {
-            console.log(response.credential);
-            var userDetails = jwt_decode(response.credential);
-            setUser(userDetails);
-            console.log(userDetails);
-        }
+    const navigate = useNavigate();
+
+    const onSuccessSignIn = (res) => {
+        var userData = jwt_decode(res.credential);
+        setUser(userData);
+        console.log(userData);
+        navigate("/");
     }
+
     useEffect(() => {
-        initializeGoogleSignIn();
+        google.accounts.id.initialize({
+            client_id: "840515466319-lnfthf7hssiqp4047a6v3o5gtdq1q7vn.apps.googleusercontent.com",
+            callback: onSuccessSignIn,
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById("googleBtn"),
+            {
+                theme: "filled_black",
+                size: "large",
+                text: "continue_with",
+                shape: "rectangular",
+                width: "240",
+                height: "50",
+            }
+        );
     }, [])
 
     return (
@@ -55,12 +65,12 @@ const SignInPage = () => {
                         <h1 className='text-3xl text-center text-white font-bold'>Welcome Back</h1>
                         <div className='flex flex-col justify-center items-center text-center gap-3'>
                             <p className='text-center text-white'>Sign In using : </p>
-                            <div className='gooleBtn flex justify-center items-center gap-5'>
-                                <FcGoogle className='w-[30px] h-[30px] text-cyan-600 hover:text-[#db4437] transition-all ease-in-out duration-300 cursor-pointer'
-                                    onClick={initializeGoogleSignIn} />
+                            <div id='googleBtn' className='flex justify-center items-center gap-5'>
+
+                            </div>
+                            <div className='flex justify-center items-center gap-5'>
                                 <FaFacebook className='w-[30px] h-[30px] text-cyan-600 hover:text-[#3b5998] transition-all ease-in-out duration-300 cursor-pointer' />
                                 <FaGithub className='w-[30px] h-[30px] text-cyan-600 hover:text-white transition-all ease-in-out duration-300 cursor-pointer' />
-
                             </div>
                         </div>
                         <p className='text-cyan-300 font-medium'>Do not have an account ? <span className='text-cyan-600 hover:text-cyan-700 transition-all duration-300 ease-in-out '><Link to="/signup">Sign Up</Link></span> </p>

@@ -9,6 +9,7 @@ const Carousel = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   const getImages = () => {
+    // https://api.harvardartmuseums.org/RESOURCE_TYPE?apikey=YOUR_API_KEY     harvard art museum api
     const url = "https://openaccess-api.clevelandart.org/api/artworks"
     const params = {
       q: "",
@@ -19,7 +20,7 @@ const Carousel = () => {
     axios.get(url, { params })
       .then((res) => {
         const allImages = res.data.data;
-        console.log(allImages);
+        // console.log(allImages);
         setImages(allImages);
       })
       .catch((err) => {
