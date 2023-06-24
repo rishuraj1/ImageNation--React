@@ -9,7 +9,6 @@ const Carousel = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   const getImages = () => {
-    // https://api.harvardartmuseums.org/RESOURCE_TYPE?apikey=YOUR_API_KEY     harvard art museum api
     const url = "https://openaccess-api.clevelandart.org/api/artworks"
     const params = {
       q: "",
@@ -38,6 +37,7 @@ const Carousel = () => {
 
   useEffect(() => {
     getImages();
+    // console.log(images);
   }, [])
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Carousel = () => {
       }, 3000);
     }
     return () => clearInterval(interval);
-  }, [activeIndex, isPaused, images.length, images]);
+  }, [isPaused, images.length, images]);
 
 
   return (
@@ -62,7 +62,7 @@ const Carousel = () => {
               key={index}
               src={image.images.web.url}
               alt={image.title}
-              
+
               className={`object-cover w-full h-[500px] flex items-center ${index === activeIndex
                 ? "opacity-100 transition duration-1000 ease-in-out transform scale-100"
                 : "hidden max-w-full opacity-40 transition duration-1000 ease-in-out transform scale-95"
@@ -75,6 +75,7 @@ const Carousel = () => {
           </div>
         )
       })}
+
       <div className="flex mt-4 justify-center items-center">
         <button className="mx-2" onClick={handlePlay}>
           {" "}
