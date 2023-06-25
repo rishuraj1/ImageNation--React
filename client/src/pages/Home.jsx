@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Carousel, FormField, Loader } from '../components'
 import { preview } from '../assets'
 
@@ -8,14 +9,66 @@ const Home = () => {
     name: '',
     prompt: '',
     photo: '',
+    api_key: '',
   })
-
+  const [loading, setLoading] = useState(false)
   const [generatingImg, setGeneratingImg] = useState(false)
 
+  const navigate = useNavigate()
+
   function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   function handleSurpriseMe() {
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        })
+
+        await response.json();
+        navigate('/');
+      } catch (error) {
+        alert(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please fill all the fields');
+    }
+  }
+
+  const generateImage = async () => {
+    if (form.prompt && form.api_key) {
+      try {
+        setGeneratingImg(true);
+        const response = await fetch('http://localhost:8080/api/v1/dalle', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        })
+        const data = await response.json();
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else {
+      alert('Please fill all the fields');
+    }
   }
 
   return (
@@ -31,8 +84,8 @@ const Home = () => {
         <h1 className='font-bold text-4xl dark:text-cyan-300'>Generate your own art</h1>
       </div>
 
-      <div className='flex justify-between items-center'>
-        <form action="submit" className='flex flex-col justify-normal items-center gap-5'>
+      <div className='flex items-center gap-[250px]'>
+        <form onSubmit={handleSubmit} className='flex flex-col justify-normal items-center gap-5'>
           <FormField
             labelName='Name'
             type='text'
@@ -53,10 +106,33 @@ const Home = () => {
             handleSurpriseMe={handleSurpriseMe}
           />
 
-          <button className='items-center bg-purple-700 p-2 rounded-lg text-white font-bold hover:bg-purple-900 transition-all duration-300 ease-in-out'>
-            Generate Image
-          </button>
+          <p className='text-md font-semibold dark:text-cyan-300'>You can get your Open AI API key from <a target='_blank' href="https://platform.openai.com/account/api-keys" className='text-purple-800 hover:text-purple-950 transition-all duration-200 ease-in-out'>here</a></p>
+
+          <FormField
+            labelName='API key'
+            type='text'
+            name='api_key'
+            placeholder='Enter your API key'
+            value={form.api_key}
+            handleChange={handleChange}
+          />
+
+          <div className='flex gap-10'>
+            <button
+              type='button'
+              onClick={generateImage}
+              className='items-center bg-purple-700 p-2 rounded-lg text-white font-bold hover:bg-purple-900 transition-all duration-300 ease-in-out'>
+              Generate Image
+            </button>
+
+            <button
+              type='submit'
+              className='items-center bg-purple-700 p-2 rounded-lg text-white font-bold hover:bg-purple-900 transition-all duration-300 ease-in-out'>
+              {loading ? 'Sharing' : 'Share Now'}
+            </button>
+          </div>
         </form>
+
         <div className='relative border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center'>
           {form.photo ? (
             <div>
@@ -65,7 +141,6 @@ const Home = () => {
                 alt={form.prompt}
                 className='w-full h-full object-contain'
               />
-              <button className='absolute top-2 right-2 bg-red-500 p-2 rounded-lg text-white font-bold hover:bg-red-700 transition-all duration-300 ease-in-out'> Share </button>
             </div>
           ) : (
             <img

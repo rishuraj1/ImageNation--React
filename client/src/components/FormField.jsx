@@ -6,7 +6,7 @@ const FormField = ({ labelName, type, name, placeholder, value, handleChange, is
             <div className='flex gap-5 justify-between items-center'>
                 <label
                     htmlFor={name}
-                    className='text-slate-950 dark:text-cyan-300'
+                    className='text-slate-950 dark:text-cyan-300 text-2xl font-semibold'
                 >
                     {labelName}
                 </label>
@@ -20,7 +20,7 @@ const FormField = ({ labelName, type, name, placeholder, value, handleChange, is
                 )}
             </div>
             <input
-                className='border border-purple-800 w-[300px] rounded-lg p-2 bg-cyan-200'
+                className='border border-purple-800 w-[400px] rounded-lg p-2 bg-cyan-200 dark:bg-black dark:text-cyan-300'
                 type={type}
                 name={name}
                 placeholder={placeholder}
