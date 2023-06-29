@@ -9,7 +9,7 @@ const Navbar = ({ darkMode, setDarkMode, setUser, user }) => {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <nav className="flex bg-gradient-to-br dark:from-slate-900 dark:to-slate-800 justify-between items-center p-1 from-cyan-100 to-gray-300">
+      <nav className="flex bg-gradient-to-b dark:from-slate-900 dark:to-slate-800 justify-between items-center p-1 from-cyan-300 to-cyan-400">
         <div className="m-2 flex justify-center items-center gap-2">
           <Link to="/home">
             <img
