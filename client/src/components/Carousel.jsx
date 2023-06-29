@@ -8,23 +8,23 @@ const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const getImages = () => {
-    const url = "https://openaccess-api.clevelandart.org/api/artworks"
-    const params = {
-      q: "",
-      skip: 0,
-      limit: 10,
-      has_image: 1,
-    };
-    axios.get(url, { params })
-      .then((res) => {
-        const allImages = res.data.data;
-        // console.log(allImages);
-        setImages(allImages);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  const getImages = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/images", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const result = await res.json();
+        // console.log(result.data);
+        setImages(result.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleClick = (index) => {
@@ -37,7 +37,6 @@ const Carousel = () => {
 
   useEffect(() => {
     getImages();
-    // console.log(images);
   }, [])
 
   useEffect(() => {
