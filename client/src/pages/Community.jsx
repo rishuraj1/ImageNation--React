@@ -25,6 +25,7 @@ const Community = () => {
     setLoading(true);
     try {
       const res = await fetch('https://imagenation-api.vercel.app/api/v1/posts', {
+
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
