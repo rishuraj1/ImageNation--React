@@ -7,6 +7,8 @@ const router = express.Router();
 router.use(cors(
     {
         origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        allowedHeaders: "Content-Type, Authorization, Origin, X-Requested-With, Accept",
     }
 ));
 
@@ -20,13 +22,13 @@ router.route('/').get(async (req, res) => {
             limit: 10,
             has_image: 1,
         }
-        // const headers = {
-        //     "Content-Type": "application/json",
-        //     "Access-Control-Allow-Origin": "*",
-        //     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        // }
+        const headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        }
 
-        const response = await axios.get(url, { params });
+        const response = await axios.get(url, { params }, { headers });
         const images = response.data.data;
         res.status(200).json({ success: true, data: images });
 
