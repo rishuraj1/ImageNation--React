@@ -37,7 +37,7 @@ const Home = () => {
         })
 
         await response.json();
-        navigate('/');
+        navigate('/community');
       } catch (error) {
         alert(error);
       } finally {
