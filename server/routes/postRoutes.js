@@ -1,12 +1,22 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import { v2 as cloudinary } from 'cloudinary';
+import cors from 'cors';
 
 import Post from '../mongodb/models/post.js';
 
 dotenv.config();
 
 const router = express.Router();
+
+router.use(cors(
+    {
+        origin: "*",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        allowedHeaders: "Content-Type, Authorization, Origin, X-Requested-With, Accept",
+    }
+));
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
