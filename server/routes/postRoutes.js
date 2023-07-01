@@ -28,7 +28,12 @@ cloudinary.config({
 
 router.route('/').get(async (req, res) => {
     try {
-        const posts = await Post.find({});
+        const headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        }
+        const posts = await Post.find({}, { headers});
         res.status(200).json({ success: true, data: posts });
     } catch (e) {
         console.log(e);
@@ -39,15 +44,21 @@ router.route('/').get(async (req, res) => {
 //create a post
 
 router.route('/').post(async (req, res) => {
-    try { 
+    try {
         const { name, prompt, photo } = req.body;
         const photoUrl = await cloudinary.uploader.upload(photo);
+
+        const headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        }
 
         const newPost = await Post.create({
             name,
             prompt,
             photo: photoUrl.url,
-        });
+        }, { headers });
 
         res.status(200).json({ success: true, data: newPost });
     } catch (e) {
