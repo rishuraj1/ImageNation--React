@@ -33,7 +33,7 @@ router.route('/').get(async (req, res) => {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
         }
-        const posts = await Post.find({}, { headers});
+        const posts = await Post.find({});
         res.status(200).json({ success: true, data: posts });
     } catch (e) {
         console.log(e);
