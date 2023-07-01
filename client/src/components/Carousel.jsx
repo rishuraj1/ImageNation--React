@@ -9,7 +9,7 @@ const Carousel = () => {
 
   const getImages = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/v1/images");
+      const res = await fetch("https://imagenation-api.vercel.app/api/v1/images");
       if (res.ok) {
         const result = await res.json();
         // console.log(result.data);
